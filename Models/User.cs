@@ -13,6 +13,6 @@ namespace core_rpg_mvc.Models
 
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public virtual ICollection<Character> Characters { get; set; }
+        public virtual ICollection<Character> Characters { get; set; } // One to Many r/ship
     }
 }

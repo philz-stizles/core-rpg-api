@@ -13,6 +13,6 @@ namespace core_rpg_mvc.Dtos
         public int Intelligence { get; set; }
         public CharacterType CharacterType { get; set; }
         public string Weapon { get; set; }
-        public ICollection<string> Skills { get; set; }
+        public string[] Skills { get; set; }
     }
 }

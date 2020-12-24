@@ -51,7 +51,7 @@ namespace core_rpg_mvc.Migrations
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("Victories")
@@ -70,6 +70,23 @@ namespace core_rpg_mvc.Migrations
                     b.HasIndex("WeaponId");
 
                     b.ToTable("Characters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CharacterType = 0,
+                            Defeats = 10,
+                            Defense = 10,
+                            Fights = 100,
+                            HitPoints = 100,
+                            Intelligence = 10,
+                            Name = "Frodo",
+                            Strength = 10,
+                            UserId = 1,
+                            Victories = 10,
+                            WeaponId = 2
+                        });
                 });
 
             modelBuilder.Entity("core_rpg_mvc.Models.CharacterSkill", b =>
@@ -85,6 +102,13 @@ namespace core_rpg_mvc.Migrations
                     b.HasIndex("SkillId");
 
                     b.ToTable("CharacterSkills");
+
+                    b.HasData(
+                        new
+                        {
+                            CharacterId = 1,
+                            SkillId = 2
+                        });
                 });
 
             modelBuilder.Entity("core_rpg_mvc.Models.Skill", b =>
@@ -103,6 +127,26 @@ namespace core_rpg_mvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Skills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Damage = 30,
+                            Name = "Fireball"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Damage = 20,
+                            Name = "Frenzy"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Damage = 50,
+                            Name = "Blizzard"
+                        });
                 });
 
             modelBuilder.Entity("core_rpg_mvc.Models.User", b =>
@@ -141,6 +185,16 @@ namespace core_rpg_mvc.Migrations
                         .HasFilter("[Username] IS NOT NULL");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "defaultUser@somemai.com",
+                            PasswordHash = new byte[] { 89, 251, 61, 167, 88, 87, 44, 213, 176, 75, 112, 196, 6, 175, 74, 109, 153, 137, 34, 201, 46, 213, 215, 176, 48, 170, 250, 9, 232, 44, 213, 14, 204, 245, 52, 178, 187, 55, 138, 218, 230, 166, 150, 109, 147, 124, 59, 142, 205, 47, 30, 224, 57, 237, 143, 90, 230, 12, 249, 76, 152, 63, 115, 149 },
+                            PasswordSalt = new byte[] { 10, 158, 234, 34, 158, 101, 149, 124, 207, 133, 247, 156, 65, 60, 99, 24, 187, 204, 238, 132, 246, 104, 183, 166, 245, 66, 34, 188, 190, 174, 60, 222, 64, 44, 141, 138, 21, 107, 165, 66, 53, 90, 103, 203, 142, 119, 251, 1, 96, 81, 247, 105, 141, 67, 67, 254, 119, 200, 1, 19, 96, 121, 33, 13, 130, 255, 211, 151, 118, 234, 150, 78, 1, 86, 240, 237, 159, 244, 200, 195, 28, 109, 251, 179, 158, 206, 97, 187, 144, 215, 65, 194, 210, 199, 149, 170, 41, 63, 178, 127, 110, 245, 191, 16, 249, 103, 148, 227, 54, 110, 46, 52, 134, 190, 171, 167, 0, 79, 114, 227, 11, 169, 58, 17, 28, 210, 91, 193 },
+                            Username = "Default"
+                        });
                 });
 
             modelBuilder.Entity("core_rpg_mvc.Models.Weapon", b =>
@@ -159,15 +213,27 @@ namespace core_rpg_mvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Weapons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Damage = 20,
+                            Name = "The Master Sword"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Damage = 5,
+                            Name = "Crystal Wand"
+                        });
                 });
 
             modelBuilder.Entity("core_rpg_mvc.Models.Character", b =>
                 {
                     b.HasOne("core_rpg_mvc.Models.User", "User")
                         .WithMany("Characters")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("core_rpg_mvc.Models.Weapon", "Weapon")
                         .WithMany()

@@ -68,6 +68,8 @@ namespace core_rpg_mvc.Services
         {
             var characters = await _ctx.Characters
                 .Where(c => c.UserId == UserId())
+                .Include(c => c.Weapon)
+                .Include(c => c.Skills).ThenInclude(cs => cs.Skill)
                 .Select(c => _mapper.Map<CharacterDto>(c))
                 .ToArrayAsync();
             return new ServiceResponse<CharacterDto[]> { Status = true, Message = "Successful", Data = characters };

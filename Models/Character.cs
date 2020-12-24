@@ -16,10 +16,10 @@ namespace core_rpg_mvc.Models
         public int Intelligence { get; set; } = 10;
         [Required]
         public CharacterType CharacterType { get; set; } = CharacterType.Knight;
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public virtual User User { get; set; }
-        public int? WeaponId { get; set; }
-        public virtual Weapon Weapon { get; set; }
+        public int? WeaponId { get; set; } // One to One
+        public virtual Weapon Weapon { get; set; } // Relationship
         public int Fights { get; set; } = 100;
         public int Victories { get; set; } = 10;
         public int Defeats { get; set; } = 10;

@@ -10,7 +10,7 @@ namespace core_rpg_mvc.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles = "Player")]
     public class CharacterController : ControllerBase
     {
         private static Character knight = new Character();
